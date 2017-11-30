@@ -11,6 +11,10 @@ import scala.collection.JavaConverters._
 
 object WordCountDemo {
 
+  private val value = new KeyValueMapper[String, String, String] {
+    override def apply(k: String, v: String): String = v
+  }
+
   def main(args: Array[String]): Unit = {
 
     val props = new Properties()
@@ -25,7 +29,7 @@ object WordCountDemo {
 
     val wordCountsKTable = textLines
       .flatMapValues[String](_.toLowerCase.split(" ").toIterable.asJava)
-      .groupBy[String]((k, v) => v)
+      .groupBy[String](value)
       .count
 
     wordCountsKTable.toStream.to(
