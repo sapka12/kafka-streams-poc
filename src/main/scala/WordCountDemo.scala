@@ -1,5 +1,3 @@
-package com.github.aseigneurin.kafka.streams.scala
-
 import java.util.Properties
 
 import org.apache.kafka.clients.consumer.ConsumerConfig
